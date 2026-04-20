@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedback</title>
+  <style>
+    header {
+      text-align: center;
+      background-color: #ea1672;
+      color: white;
+      padding: 5px;
+      font-size: 25px;
+    }
+    section {
+      text-align: center;
+      margin: 50px;
+      font-size: 25px;
+    }
+    section button {
+      padding: 100px 100px;
+      border-radius: 10px;
+      margin: 50px;
+      border-color: whitesmoke;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+    .happy {
+      background-image: url("smile.png");
+      background-color: white;
+    }
+    .medium {
+      background-image: url("medium.png");
+      background-color: white;
+    }
+    .sad {
+      background-image: url("sad.png");
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>  
+    <h1>CITYMATE</h1>
+  </header>
+  <section>
+    <h2>Please Give your feedback</h2>
+    <button class="happy" onclick="showFeedback('Thank you! We’re glad you’re happy!','happy')"></button>
+    <button class="medium" onclick="showFeedback('Thanks for your feedback. We’ll try to improve.','medium')"></button>
+    <button class="sad" onclick="showFeedback('We’re sorry! We’ll work harder to do better.','sad')"></button>
+  </section>
+  <script>
+    function showfeedback(msg,type){
+      alert(msg);
+      fetch("http://localhost:3000/feedback"){
+        
+      }
+    
+
+    }
+    
+
+  </script>
+</body>
+</html>

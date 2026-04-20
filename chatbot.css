@@ -1,0 +1,166 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+header h1{
+  text-align: center;
+  background-color:#e91e63;
+  color:white;
+  padding:30px;
+  font-size: 40px;
+}
+body{
+  overflow-y: auto; 
+  background-color: rgb(254, 254, 248);
+}
+.chatBox p {
+  background-color:#f8c6e3;
+  padding: 30px;
+  margin: 10px;
+  border-radius: 20px;
+  width: 70%;
+  text-align: right;
+}
+.chatbot-heading {
+  text-align: center;
+  padding: 20px;
+  font-size: large;
+}
+.Botreply {
+  background-color: #f8c6e3;
+  color: #000;
+  padding: 10px;
+  margin-top: 20px;
+  margin: 100px 10px;
+  border-radius: 20px;
+  width: 70%;
+  font-size: large;
+  text-align: center;
+}
+.optionBtn {
+  margin: 10px;
+  padding: 10px 30px;
+  background-color: #d81b60;
+  color: white;
+  font-size: large;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.optionBtn:hover {
+  background-color: black;
+}
+.Userreply {
+  background-color: #caf8c6;
+  padding: 20px;
+  margin: 10px;
+  float: right;
+  border-radius: 20px;
+  width: 50%;
+  text-align: center;
+  font-size: large;
+}
+.Interestreply{
+  background-color: #caf8c6;
+  padding:20px;
+  margin: -80px 10px;
+  float: right;
+  border-radius: 20px;
+  width: 50%;
+  text-align: center;
+  font-size: large;
+}
+.reply{
+  background-color: #caf8c6;
+  padding:20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  float: right;
+  border-radius: 20px;
+  width: 50%;
+  text-align: center;
+  font-size: large;
+}
+.modereply{
+  background-color: #caf8c6;
+  padding:20px;
+  margin:-80px 5px;
+  float: right;
+  border-radius: 20px;
+  width: 50%;
+  text-align: center;
+  font-size: large;
+}
+.chatreply {
+  background-color: #f8c6e3;
+  color: #000;
+  padding: 10px;
+  margin: 10px 10px; 
+  border-radius: 20px;
+  width: 70%;
+  font-size: large;
+  text-align: center;
+}
+.input{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#userInput {
+    padding: 12px;
+    width: 250px;
+    border-color:#ccc;
+    border-radius: 20px 0 0 20px;
+    font-size: 15px;
+}
+#sendBtn {
+  padding: 10px ;
+  border: none;
+  background-color: #e91e63;
+  color: white;
+  border-radius: 0 20px 20px 0;
+  font-size: 19px;
+}
+#sendBtn:hover {
+  background-color: #ca1255;
+}
+.placeCard {
+  border: 1px solid whitesmoke;
+  padding: 15px;
+  margin: 12px 0;
+  border-radius: 20px;
+  background:whitesmoke;
+}
+.box{
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+.place-image {
+  width: 100%;
+  max-height: 400px;
+  max-width: 300px;
+  height: auto;
+  margin: 20px;
+  border-radius: 10px;
+  display: flex;
+}
+.placeCard p {
+  margin-top: 50px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  text-align: justify;
+}
+.place-link {
+  display: block;
+  color: white;
+  text-decoration: none;
+  background:#d81b60;
+  padding: 10px;
+  border-radius: 10px;
+}

@@ -1,0 +1,51 @@
+*{
+    margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+header h1{
+  text-align: center;
+  background-color: #3f3b7c;
+  padding: 75px;
+  color: maroon;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 50px;
+  background-image:url("P.png"); 
+  background-size: contain;
+}
+section {
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  gap: 20px;               
+  margin-top: 50px;
+}
+
+.Tourist{
+  width: 200px;
+  height: 250px;
+  background-image: url("T.png");
+  background-size: contain;
+  display: flex;  
+  border-radius: 10px;
+}
+.Local{
+  width: 200px;
+  height: 250px;
+  background-image: url("L.png");
+  background-size: cover;
+  display: flex;
+  border-radius: 10px;
+}
+.Tourist:hover, .Local:hover {
+  text-decoration: none;
+  box-shadow: 0 0 20px black; 
+  cursor: pointer;
+}
+
+.Tourist a, .Local a{
+  text-decoration: none;
+  color: #0c0121;
+  font-size: 24px;
+  font-weight: bold;
+}
