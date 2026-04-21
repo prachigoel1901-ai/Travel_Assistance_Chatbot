@@ -1,40 +1,44 @@
-const express =require('express');
-const mysql =require('mysql');   // mysql npm package import kia
-// usage of mysql npm package this is already written on npm website
-const app =express();
-//ek error show hota so this pacakge needed
-const cors =require('cors');
-app.use(cors());
+const express = require('express');
+const mysql = require('mysql2');
+const cors = require('cors');
 
+const app = express();
+
+app.use(cors());
 app.use(express.json());
 
-const db = mysql.createConnection({                         
-
-  host     : 'localhost',
-  user     : 'root',
-  password : 'Sneha',
-  database : 'travel',
-  
-});
-db.connect((err)=> {
-  if(err){
-    console.log("not connected");
-
-  }
-  else{
-    console.log("Mysql connected");
-    
+const db = mysql.createConnection({
+  host: 'metro.proxy.rlwy.net',
+  user: 'root',
+  password: 'eFxdogvOhjkuqqSuGgzjHzQcVPLjKOmH',
+  database: 'railway',
+  port: 47432,
+  ssl: {
+    rejectUnauthorized: false
   }
 });
-// route se humne ek path de dia to access the data of backend
-  
+
+db.connect((err) => {
+  if (err) {
+    console.log("DB connection failed", err);
+  } else {
+    console.log("DB connected");
+  }
+});
+
+app.get('/', (req, res) => {
+  res.send("API is running");
+});
+
 app.get('/place', (req, res) => {
   const city = req.query.city;
   const interest = req.query.interest;
 
   const query = "SELECT * FROM place WHERE city = ? AND category = ?";
+  
   db.query(query, [city, interest], (err, results) => {
     if (err) {
+      console.log(err);
       res.status(500).send("error");
     } else {
       res.json(results);
@@ -42,7 +46,6 @@ app.get('/place', (req, res) => {
   });
 });
 
-
-app.listen(3000,()=>{
-  console.log('server runing on port 3000');
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
 });
