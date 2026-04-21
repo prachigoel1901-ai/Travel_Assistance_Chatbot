@@ -109,7 +109,7 @@ async function Findplace(city, interest) {
 
   try {
     // Send request to backend with city and interest
-    const response = await fetch(`http://localhost:3000/place?city=${city}&interest=${interest}`);
+    const response = await fetch(`https://travelassistancechatbot-production.up.railway.app/place?city=${city}&interest=${interest}`);
     const data = await response.json();
     const chatArea = document.querySelector("section");
     const results = document.createElement("div");
