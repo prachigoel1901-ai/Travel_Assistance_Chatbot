@@ -7,6 +7,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Important for Railway
+app.set('trust proxy', 1);
+
 // Database connection
 const db = mysql.createConnection({
   host: process.env.MYSQLHOST,
@@ -19,7 +22,7 @@ const db = mysql.createConnection({
   }
 });
 
-// Connect to DB
+// Connect DB
 db.connect((err) => {
   if (err) {
     console.error("❌ DB connection failed:", err);
@@ -28,14 +31,14 @@ db.connect((err) => {
   }
 });
 
-// Home route
+// Home route (VERY IMPORTANT)
 app.get('/', (req, res) => {
-  res.send("API is running 🚀");
+  res.status(200).send("API is running 🚀");
 });
 
-// Health check route (for testing)
+// Health check route
 app.get('/health', (req, res) => {
-  res.send("Server is healthy ✅");
+  res.status(200).send("Server is healthy ✅");
 });
 
 // API route
@@ -43,26 +46,30 @@ app.get('/place', (req, res) => {
   const city = req.query.city;
   const interest = req.query.interest;
 
+  // check parameters
+  if (!city || !interest) {
+    return res.status(400).send("Missing parameters");
+  }
+
   const query = "SELECT * FROM place WHERE city = ? AND category = ?";
-  
+
   db.query(query, [city, interest], (err, results) => {
     if (err) {
       console.error("❌ Query error:", err);
-      res.status(500).send("Server error");
-    } else {
-      res.json(results);
+      return res.status(500).send("Server error");
     }
+    res.json(results);
   });
 });
 
-// PORT (IMPORTANT FIX)
+// PORT fix (CRITICAL)
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
 
-// Crash protection (IMPORTANT)
+// Crash protection
 process.on("uncaughtException", (err) => {
   console.error("Uncaught Exception:", err);
 });
