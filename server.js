@@ -7,10 +7,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Debug: log every request
-app.use((req, res, next) => {
-  console.log(`Incoming request: ${req.method} ${req.url}`);
-  next();
+// ---- Health check (VERY IMPORTANT for Railway) ----
+app.get('/health', (req, res) => {
+  res.status(200).send("OK");
+});
+
+// ---- Root route (must respond fast) ----
+app.get('/', (req, res) => {
+  res.status(200).send("OK");
 });
 
 // ---- Database connection ----
@@ -34,20 +38,7 @@ db.connect((err) => {
   }
 });
 
-// ---- Routes ----
-
-// Root route (VERY IMPORTANT)
-app.get('/', (req, res) => {
-  console.log("Root route hit");
-  res.status(200).send("API is running 🚀");
-});
-
-// Health check
-app.get('/health', (req, res) => {
-  res.status(200).send("Server is healthy ✅");
-});
-
-// API route
+// ---- API route ----
 app.get('/place', (req, res) => {
   const city = req.query.city;
   const interest = req.query.interest;
@@ -70,7 +61,6 @@ app.get('/place', (req, res) => {
 // ---- Server ----
 const PORT = process.env.PORT || 3000;
 
-// IMPORTANT: bind to 0.0.0.0
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
