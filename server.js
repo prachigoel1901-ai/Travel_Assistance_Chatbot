@@ -7,15 +7,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// (optional but fine on Railway)
-app.set('trust proxy', 1);
+// Debug: log every request
+app.use((req, res, next) => {
+  console.log(`Incoming request: ${req.method} ${req.url}`);
+  next();
+});
 
 // ---- Database connection ----
 const db = mysql.createConnection({
   host: process.env.MYSQLHOST,
   user: process.env.MYSQLUSER || 'root',
   password: process.env.MYSQLPASSWORD,
-  database: process.env.MYSQL_DATABASE, // ✅ FIXED NAME
+  database: process.env.MYSQL_DATABASE, // ✅ correct name
   port: process.env.MYSQLPORT,
   ssl: {
     rejectUnauthorized: false
@@ -33,8 +36,9 @@ db.connect((err) => {
 
 // ---- Routes ----
 
-// Home route (must respond fast)
+// Root route (VERY IMPORTANT)
 app.get('/', (req, res) => {
+  console.log("Root route hit");
   res.status(200).send("API is running 🚀");
 });
 
@@ -66,7 +70,8 @@ app.get('/place', (req, res) => {
 // ---- Server ----
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
+// IMPORTANT: bind to 0.0.0.0
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
 
