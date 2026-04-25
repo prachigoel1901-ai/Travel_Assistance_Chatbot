@@ -7,22 +7,22 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Important for Railway
+// (optional but fine on Railway)
 app.set('trust proxy', 1);
 
-// Database connection
+// ---- Database connection ----
 const db = mysql.createConnection({
   host: process.env.MYSQLHOST,
-  user: process.env.MYSQLUSER,
+  user: process.env.MYSQLUSER || 'root',
   password: process.env.MYSQLPASSWORD,
-  database: process.env.MYSQLDATABASE,
+  database: process.env.MYSQL_DATABASE, // ✅ FIXED NAME
   port: process.env.MYSQLPORT,
   ssl: {
     rejectUnauthorized: false
   }
 });
 
-// Connect DB
+// Connect DB (non-blocking)
 db.connect((err) => {
   if (err) {
     console.error("❌ DB connection failed:", err);
@@ -31,12 +31,14 @@ db.connect((err) => {
   }
 });
 
-// Home route (VERY IMPORTANT)
+// ---- Routes ----
+
+// Home route (must respond fast)
 app.get('/', (req, res) => {
   res.status(200).send("API is running 🚀");
 });
 
-// Health check route
+// Health check
 app.get('/health', (req, res) => {
   res.status(200).send("Server is healthy ✅");
 });
@@ -46,7 +48,6 @@ app.get('/place', (req, res) => {
   const city = req.query.city;
   const interest = req.query.interest;
 
-  // check parameters
   if (!city || !interest) {
     return res.status(400).send("Missing parameters");
   }
@@ -62,14 +63,14 @@ app.get('/place', (req, res) => {
   });
 });
 
-// PORT fix (CRITICAL)
+// ---- Server ----
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
 
-// Crash protection
+// ---- Crash protection ----
 process.on("uncaughtException", (err) => {
   console.error("Uncaught Exception:", err);
 });
